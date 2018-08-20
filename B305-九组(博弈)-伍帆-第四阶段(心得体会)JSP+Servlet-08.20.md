@@ -1,0 +1,41 @@
+# Servlet+JSP思想总结   
+### 一、学习体会
+本阶段的学习主要是通过视频的方式进行，起步阶段同样是一脸懵逼，不知道视频中讲的是什么，学习到后面的时候，才慢慢地对整个学习过程有了比较条理的理解。
+
+#### **Servlet:**
+##### （1）.Servlet的生命周期：
+- 1）.构造器：只被调用一次，第一次请求Servlet 时，创建Servlet 的实例，调用构造器。 
+- 2）.init方法：只被调用一次，在创建好实例就立即被调用。用于初始化当前Servlet.
+- 3）.service：被多次调用，每次请求都会调用servlet方法，实际用于响应请求
+- 4）.destroy：只被调用一次，在当前Servlet所在的WEB应用被卸载前调用，用于释放当前Servlet 所占的资源。
+
+##### （2）.常用的传递参数的方法：GET 和 POST方法
+
+- **GET方法：**
+   - 1）.在浏览器地址栏中输入某个URL地址或单击网页上的一个超链接时，浏览器发出的HTTP请求消息的请求    方式为GET。
+   - 2）.如果网页中的<form>表单元素的method属性被设置为了“GET”，浏览器提交这个FORM表单时生成的HTTP请求消息的请求方式也为GET。
+   - 3）.使用GET请求方式给WEB服务器传递参数的格式：htp:/www.1234.com/counter.jsp?name=lc&password=123
+ 
+- **POST方法：**
+   - 1）.POST请求方式主要用于商WEB服务器端程序提交FORM表单中的数据：form 表单的method 置为 POST
+   - 2）.POST方式将各个表单字段元素及其数据作为HTTP消息的实体内容发送给WEB服务器，传送的数据量要比使用GET方式传送的数据量大得多。
+   - 
+   
+#### **JSP：**
+将 Java 代码和 HTML 语句混合在同一个文件中编写,只对网页中的要动态产生的内容采用 Java 代码来编写，而对固定不变的静态内容采用普通静态 HTML 页面的方式编写。
+- 1）.在jsp中编写代码的时候需要在<% %>中进行编写
+- 2）.在jsp中同样可以采用注释，但与HTML注释有区别：
+		<%-- JSP注释 --%>   <!— HTML注释 -->
+		区别：JSP注释可以阻止Java代码的执行。
+
+#### **Filter：**
+-  1）.filter可以对发送到Servlet的请求进行拦截，并对响应也进行拦截。
+-  2）.filter是实现了filter接口的java类。
+- 3）.filter需要在web.xml文件中进行配置和映射。
+
+### 二、实践一些问题
+  本次实践中，退出登录之后点击浏览器的返回键不能显示主页是最大的一个困难。刚开时候的时候确实没什么头绪，只是做了在退出登录的时候同时对session进行清空，但是无法达到效果，之后查询资料后又在退出登录的时候对浏览器的session和缓存同时进行清理，但还是无法达到效果，之后不断进行调试，除了主页面，在其他的页面都进行了缓存的清理，但始终无法达到想要的效果，之后询问了解到在主页面处进行缓存清理就可以达到效果，试了确实可以，但自己想的是一进主页面就进行缓存清理，那么要是还有对于进入主页面之后的一些操作，那么账户信息就不会保存，也就无法进行其他的操作，但经过不断调试之后，发现只有在主页面清理缓存才能达到效果，虽然我知道这个肯定不是好的解决方式，但可以是由于自身的代码结构的问题，我也只好采用了这种方式。
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总结人：伍帆
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间：2018.8.20
+
